@@ -13,7 +13,7 @@ const juegos = require(__dirname + '/routes/juegos');
 const auth = require(__dirname + '/routes/auth');
 
 //Conexión a bbdd
-mongoose.connect('mongodb://127.0.0.1:27017/playrest_v3',{useNewUrlParser: true});
+mongoose.connect('mongodb://mongodb:27017/playrest_v3',{useNewUrlParser: true});
 
 //Datos de inicio
 genUsuarios.generarUsuarios();
