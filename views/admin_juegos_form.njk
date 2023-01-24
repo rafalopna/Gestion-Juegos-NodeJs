@@ -1,0 +1,150 @@
+{% extends "admin_base.njk" %}
+
+{% block contenido %}
+    <h1>Ficha juego</h1>
+
+<div id="formJuego" class="mt-2 mb-4">
+    {% if juego.id %}
+        <form action="/admin/juegos/{{juego.id}}" method="post" enctype="multipart/form-data">
+            <!--<input type="hidden" name="_method" value="put"/>-->
+    {% else  %}
+        <form action="/admin/juegos" method="post" enctype="multipart/form-data">
+    {% endif %}
+    
+        <div class="form-group mt-1">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" name="nombre"
+                value="{% if juego.id %}{{juego.nombre}}{% endif %}" placeholder="Nombre..." />
+        </div>
+    
+        <div class="form-group mt-1">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" class="form-control" name="descripcion"
+                value="{% if juego.id %}{{juego.descripcion}}{% endif %}" placeholder="Descripción..." />
+        </div>
+    
+        <div class="form-group mt-1">
+            <label for="edad">Edad:</label>
+            <input type="number" class="form-control" name="edad"
+                value="{% if juego.id %}{{juego.edad}}{% endif %}" placeholder="Edad Recomendada..." />
+        </div>
+    
+        <div class="form-group mt-1">
+            <label for="titulo">Jugadores:</label>
+            <input type="number" class="form-control" name="jugadores"
+                value="{% if juego.id %}{{juego.jugadores}}{% endif %}" placeholder="Nº Jugadores..." />
+        </div>
+
+        <div class="form-group mt-1">
+            <label for="precio">Tipo:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="rol" id="tipoJuego" 
+                    {% if juego.tipo == 'rol' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Rol
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="escape" id="tipoJuego"
+                    {% if juego.tipo == 'escape' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Escape
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="dados" id="tipoJuego"
+                    {% if juego.tipo == 'dados' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Dados
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="fichas" id="tipoJuego"
+                    {% if juego.tipo == 'fichas' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Fichas
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="cartas" id="tipoJuego"
+                    {% if juego.tipo == 'cartas' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Cartas
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="tipo" value="tablero" id="tipoJuego"
+                    {% if juego.tipo == 'tablero' %}
+                        checked
+                    {% endif %}
+                    >
+                <label class="form-check-label" for="tipo">
+                    Tablero
+                </label>
+            </div>
+        </div>
+    
+        <div class="form-group mt-1">
+            <label for="titulo">Precio:</label>
+            <input type="number" class="form-control" name="precio"
+                value="{% if juego.id %}{{juego.precio}}{% endif %}" placeholder="Precio..." />
+        </div>
+
+        <div class="form-group mt-1">
+            <label for="imagen">Imagen:</label>
+            <input type="file" class="form-control" name="imagen"
+                value="{% if juego.id %}{{juego.precio}}{% endif %}" placeholder="Introduce una imagen" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">
+            Enviar
+        </button>
+    </form>
+</div>
+
+<div id="ediciones" class="mt-2 mb-4">
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Ediciones</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for edicion in juego.ediciones %}
+                <tr>
+                <td>{{edicion.edicion}}</td>
+                <td><a href="/admin/juegos/edicion/{{juego.id}}/{{edicion.id}}" class="btn btn-primary">Editar</a></td>
+                <td>
+                    <form action="/admin/juegos/edicion/{{juego.id}}/{{ edicion.id }}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-danger">
+                            Borrar
+                        </button>
+                    </form>
+                </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock contenido %}

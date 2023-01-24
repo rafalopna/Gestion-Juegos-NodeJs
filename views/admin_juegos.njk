@@ -1,0 +1,38 @@
+{% extends "admin_base.njk" %}
+
+{% block contenido %}
+    <h1>Listado de juegos</h1>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+    <a href="/admin/juegos/nuevo" class="btn btn-primary me-md-2" type="button">Nuevo juego</a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for juego in juegos %}
+                <tr>
+                <td>{{juego.nombre}}</td>
+                <td><a href="/admin/juegos/editar/{{juego.id}}" class="btn btn-primary">Editar</a></td>
+                <td>
+                    <form action="/admin/juegos/{{ juego.id }}" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit" class="btn btn-danger">
+                            Borrar
+                        </button>
+                    </form>
+                </td>
+                <td><a href="/admin/juegos/edicion/nueva/{{juego.id}}" class="btn btn-secondary">Nueva edición</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock contenido %}

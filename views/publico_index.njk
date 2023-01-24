@@ -1,0 +1,38 @@
+{% extends "publico_base.njk" %}
+
+{% block contenido %}
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+  <a href="/admin/juegos/nuevo" class="btn btn-primary me-md-2" type="button">Nuevo juego</a>
+</div>
+
+<div id="formBuscar" class="mb-4">
+    <form action="/buscar" method="POST">
+        <div class="mb-3">
+            <input type="text" class="form-control" id="inputBuscar" name="buscar" 
+                placeholder="Buscador de juegos">
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+</div>
+
+<div class="row row-cols-2 row-cols-md-4 g-4">
+    {% for juego in juegos %}
+        <div class="col">
+            <div class="card">
+                <a href="/juegos/{{juego.id}}">
+                    <img src="/uploads/{{ juego.imagen }}" class="card-img-top" alt="...">
+                </a>
+            <div class="card-body">
+                <h5 class="card-title"><a href="/juegos/{{juego.id}}">{{ juego.nombre }}</a></h5>
+                <p class="card-text">{{ juego.jugadores }} jugadores.</p>
+            </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+{% endblock contenido %}
