@@ -19,6 +19,9 @@ mongoose.connect('mongodb://mongodb:27017/playrest_v3', {
     .then(() => console.log("Database connected!"))
     .catch(err => console.log(err));
 
+//Datos de inicio
+//genUsuarios.generarUsuarios();
+//genJuegos.generarJuegos();
 
 let app = express();
 
@@ -55,7 +58,3 @@ app.use('/',publico);
 
 
 app.listen(8080);
-
-//Datos de inicio
-genUsuarios.generarUsuarios();
-genJuegos.generarJuegos();
