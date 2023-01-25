@@ -15,7 +15,7 @@ const auth = require(__dirname + '/routes/auth');
 //Conexión a bbdd
 mongoose.connect('mongodb://mongodb:27017/playrest_v3', {
     useNewUrlParser: true,
-    useCreateIndex: true,})
+    useUnifiedTopology: true})
     .then(() => console.log("Database connected!"))
     .catch(err => console.log(err));
 
