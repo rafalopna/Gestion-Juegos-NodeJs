@@ -6,7 +6,9 @@ mongoose.set('strictQuery', true);
 
 function generarUsuarios() {
 
-    Usuario.collection.drop();
+    try {
+        Usuario.collection.drop();   
+    } catch (error) {}
 
     let usu1 = new Usuario({
         login: 'maycalle',

@@ -5,7 +5,9 @@ mongoose.set('strictQuery', true);
 
 function generarJuegos() {
     
-    Juego.collection.drop();
+    try {
+        Juego.collection.drop(); 
+    } catch (error) {}
 
     let juego1 = new Juego({
         nombre: "Parchís",
